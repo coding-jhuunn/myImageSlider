@@ -1,37 +1,31 @@
 {
   "users": [
     {
-      "id": 1,
       "name": "James Smith",
       "position": "Team Leader",
       "about": "Lorem ipsum dolor sit amet"
     },
     {
-      "id": 2,
       "name": "Emily Johnson",
       "position": "Lead Software Engineer",
       "about": "Lorem ipsum dolor sit amet"
     },
     {
-      "id": 3,
       "name": "Michael Davis",
       "position": "Quality Engineer",
       "about": "Lorem ipsum dolor sit amet"
     },
     {
-      "id": 4,
       "name": "Sarah Williams",
       "position": "Project Manager",
       "about": "Lorem ipsum dolor sit amet"
     },
     {
-      "id": 5,
       "name": "Christopher Brown",
       "position": "Senior Software Engineer",
       "about": "Lorem ipsum dolor sit amet"
     },
     {
-      "id": 6,
       "name": "Olivia Taylor",
       "position": "Junior Technical",
       "about": "Lorem ipsum dolor sit amet"

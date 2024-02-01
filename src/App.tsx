@@ -1,14 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import userData from "../data/user.json";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
-const BASE_API = "https://api.multiavatar.com/Binx Bon.png";
-
-type UserType = {
-  id: number;
-  name: string;
-  position: string;
-  about: string;
-};
+const BASE_API = "https://api.multiavatar.com/";
 
 function App() {
   const range = userData.users.length - 1;
@@ -17,9 +10,10 @@ function App() {
   const [uname, setUName] = useState<string>("");
   const [position, setPosition] = useState<string>("");
   const [about, setAbout] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
-  // const [avatar, setAvatar] = useState<string | undefined>();
-
+  const [avatar, setAvatar] = useState<string>("");
+  const [avatarID, setAavatarID] = useState<string>();
   const nextCount = (nav: string) => {
     if (nav === "next") {
       if (count >= range) {
@@ -37,47 +31,64 @@ function App() {
     console.log(count);
   };
 
-  // const navUser = async () => {
-  //   fetch(BASE_API)
-  //     .then((response) => {
-  //       return response.blob();
-  //     })
-  //     .then((data) => {
-  //       const url = URL.createObjectURL(data);
-  //       setAvatar(url);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  console.log(userData.users.length);
-  useEffect(() => {
+  const navUser = async (answer: string) => {
+    setLoading(true);
+    nextCount(answer);
+
     setUName(userData.users[count].name);
     setPosition(userData.users[count].position);
     setAbout(userData.users[count].about);
-  }, [count]);
+
+    setAavatarID(BASE_API + JSON.stringify(uname));
+
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    setTimeout(async () => {
+      try {
+        const response = await fetch(avatarID as string, {
+          signal,
+        });
+        const data = await response.blob();
+        const imageUrl = URL.createObjectURL(data);
+        console.log(imageUrl);
+
+        setAvatar(imageUrl);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    }, 1000);
+
+    return () => abortController.abort();
+  };
+
   return (
     <>
       <p>{count}</p>
       <div className="container">
         <div className="img-container">
-          <img src="https://picsum.photos/1080/1080" alt="" />
+          <img src={avatar} alt="" />
         </div>
         <div className="info-container">
           <h2>{uname}</h2>
           <h4>{position}</h4>
           <p>{about}</p>
         </div>
-        <div className="btn-container">
-          <button className="btn-back" onClick={() => nextCount("prev")}>
-            <SlArrowLeft />
-          </button>
-          <button className="btn-next" onClick={() => nextCount("next")}>
-            <SlArrowRight />
-          </button>
-        </div>
+        {loading ? (
+          "Fetching"
+        ) : (
+          <div className="btn-container">
+            <button className="btn-back" onClick={() => navUser("prev")}>
+              <SlArrowLeft />
+            </button>
+            <button className="btn-next" onClick={() => navUser("next")}>
+              <SlArrowRight />
+            </button>
+          </div>
+        )}
       </div>
-      <div className="container">{/* <img src={avatar} alt="" /> */}</div>
     </>
   );
 }
