@@ -12,7 +12,6 @@ function App() {
   const [about, setAbout] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [avatar, setAvatar] = useState<string>("");
-  const [avatarID, setAavatarID] = useState<string>();
 
   const nextUser = () => {
     if (count >= range) {
@@ -30,35 +29,34 @@ function App() {
     }
   };
 
-  const displayUsers = async (nav: number) => {
+  const fetchProfile = (nav: number) => {
     setLoading(true);
 
-    try {
-      setAavatarID(BASE_API + userData.users[nav].name + ".png");
-      const response = await fetch(avatarID as string, {
-        method: "GET",
+    fetch(BASE_API + userData.users[nav].name + ".png")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to catch");
+        }
+        return response.blob();
+      })
+      .then((data) => {
+        setTimeout(() => {
+          const imageUrl = URL.createObjectURL(data);
+          setAvatar(imageUrl);
+          setPosition(userData.users[nav].position);
+          setAbout(userData.users[nav].about);
+          setUName(userData.users[nav].name);
+          setLoading(false);
+        }, 500);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
       });
-      if (!response.ok) {
-        throw new Error("Error fetching avatar");
-      }
-      const data = await response.blob();
-      const imageUrl = URL.createObjectURL(data);
-      console.log(response);
-      console.log(data);
-      console.log(imageUrl);
-
-      setAvatar(imageUrl);
-      setPosition(userData.users[nav].position);
-      setAbout(userData.users[nav].about);
-      setUName(userData.users[nav].name);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
   };
+
   useEffect(() => {
-    displayUsers(count);
+    fetchProfile(count);
   }, [count]);
   return (
     <>
