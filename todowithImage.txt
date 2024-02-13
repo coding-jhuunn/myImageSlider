@@ -1,0 +1,6 @@
+fixed the count button
+
+display the right details
+
+combine with api
+

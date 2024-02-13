@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import userData from "../data/user.json";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 const BASE_API = "https://api.multiavatar.com/";
@@ -11,84 +11,92 @@ function App() {
   const [position, setPosition] = useState<string>("");
   const [about, setAbout] = useState<string>("");
   const [loading, setLoading] = useState(false);
-
   const [avatar, setAvatar] = useState<string>("");
   const [avatarID, setAavatarID] = useState<string>();
-  const nextCount = (nav: string) => {
-    if (nav === "next") {
-      if (count >= range) {
-        setCount(0);
-      } else {
-        setCount(count + 1);
-      }
-    } else if (nav === "prev") {
-      if (count >= 1) {
-        setCount(count - 1);
-      } else {
-        setCount(range);
-      }
+
+  const nextUser = () => {
+    if (count >= range) {
+      setCount(0);
+    } else {
+      setCount(count + 1);
     }
-    console.log(count);
   };
 
-  const navUser = async (answer: string) => {
+  const prevUser = () => {
+    if (count >= 1) {
+      setCount(count - 1);
+    } else {
+      setCount(range);
+    }
+  };
+
+  const displayUsers = async (nav: number) => {
     setLoading(true);
-    nextCount(answer);
 
-    setUName(userData.users[count].name);
-    setPosition(userData.users[count].position);
-    setAbout(userData.users[count].about);
-
-    setAavatarID(BASE_API + JSON.stringify(uname));
-
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
-    setTimeout(async () => {
-      try {
-        const response = await fetch(avatarID as string, {
-          signal,
-        });
-        const data = await response.blob();
-        const imageUrl = URL.createObjectURL(data);
-        console.log(imageUrl);
-
-        setAvatar(imageUrl);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
+    try {
+      setAavatarID(BASE_API + userData.users[nav].name + ".png");
+      const response = await fetch(avatarID as string, {
+        method: "GET",
+      });
+      if (!response.ok) {
+        throw new Error("Error fetching avatar");
       }
-    }, 1000);
+      const data = await response.blob();
+      const imageUrl = URL.createObjectURL(data);
+      console.log(response);
+      console.log(data);
+      console.log(imageUrl);
 
-    return () => abortController.abort();
+      setAvatar(imageUrl);
+      setPosition(userData.users[nav].position);
+      setAbout(userData.users[nav].about);
+      setUName(userData.users[nav].name);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
-
+  useEffect(() => {
+    displayUsers(count);
+  }, [count]);
   return (
     <>
       <p>{count}</p>
-      <div className="container">
-        <div className="img-container">
-          <img src={avatar} alt="" />
-        </div>
-        <div className="info-container">
-          <h2>{uname}</h2>
-          <h4>{position}</h4>
-          <p>{about}</p>
-        </div>
-        {loading ? (
-          "Fetching"
-        ) : (
+
+      {loading ? (
+        "Fetching"
+      ) : (
+        <div className="container">
+          <div className="img-container">
+            <img src={avatar} alt="" />
+          </div>
+
+          <div className="info-container">
+            <h2>{uname}</h2>
+            <h4>{position}</h4>
+            <p>{about}</p>
+          </div>
           <div className="btn-container">
-            <button className="btn-back" onClick={() => navUser("prev")}>
+            <button
+              className="btn-back"
+              onClick={() => {
+                prevUser();
+              }}
+            >
               <SlArrowLeft />
             </button>
-            <button className="btn-next" onClick={() => navUser("next")}>
+            <button
+              className="btn-next"
+              onClick={() => {
+                nextUser();
+              }}
+            >
               <SlArrowRight />
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }
