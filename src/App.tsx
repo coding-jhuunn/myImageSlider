@@ -60,19 +60,21 @@ function App() {
   }, [count]);
   return (
     <>
-      <div className="container bg-white  ">
-        <div className="container-title text-center">
-          <h1>Developer Team Members</h1>
+      <div className="container bg-white w-96 h-[600px] p-5 rounded flex flex-col gap-3">
+        <div className="container-title flex justify-center items-center text-center h-[5%]">
+          <h1 className="font-sans font-bold text-1xl">
+            Developer Team Members
+          </h1>
         </div>
         {loading ? (
-          <div className="loading-div flex justify-center items-center">
+          <div className="loading-div flex justify-center items-center  h-[90%]">
             Loading...
           </div>
         ) : (
-          <div className="inner-container flex flex-row">
-            <div className="backBtn-container flex w-10 bg-slate-400">
+          <div className="inner-container flex items-center h-[90%] ">
+            <div className="backBtn-container">
               <button
-                className="btn-back"
+                className="btn-back font-bold w-[25px] h-[25px] text-2xl flex justify-center items-center opacity-40 hover:opacity-100"
                 onClick={() => {
                   prevUser();
                 }}
@@ -80,20 +82,22 @@ function App() {
                 <SlArrowLeft />
               </button>
             </div>
-            <div className="details-container flex flex-col items-center">
-              <div className="img-container text-center">
-                <img src={avatar} alt="" />
+            <div className="details-container flex flex-col">
+              <div className="img-container flex justify-center">
+                <img className="h-56" src={avatar} alt="" />
               </div>
-              <div className="info-container text-center">
-                <h2>{uname}</h2>
-                <h4>{position}</h4>
-                <p className="text-justify">{about}</p>
+              <div className="info-container flex flex-col items-center gap-1">
+                <h2 className="text-3xl font-mono text-center bold font-bold">
+                  {uname}
+                </h2>
+                <h4 className="text-base font-semibold">{position}</h4>
+                <p className="text-justify text-xs font-sans">{about}</p>
               </div>
             </div>
 
-            <div className="nextBtn-container flex w-10 bg-slate-400">
+            <div className="nextBtn-container ">
               <button
-                className="btn-next"
+                className="btn-next font-bold w-[25px] h-[25px] text-2xl flex justify-center items-center opacity-40 hover:opacity-100"
                 onClick={() => {
                   nextUser();
                 }}
@@ -103,6 +107,9 @@ function App() {
             </div>
           </div>
         )}
+        <div className="credits flex justify-center items-center h-[10%] ">
+          <a href="https://github.com/coding-jhuunn">coding-jhuunn</a>
+        </div>
       </div>
     </>
   );
