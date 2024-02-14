@@ -60,41 +60,50 @@ function App() {
   }, [count]);
   return (
     <>
-      <p>{count}</p>
-
-      {loading ? (
-        "Fetching"
-      ) : (
-        <div className="container">
-          <div className="img-container">
-            <img src={avatar} alt="" />
-          </div>
-
-          <div className="info-container">
-            <h2>{uname}</h2>
-            <h4>{position}</h4>
-            <p>{about}</p>
-          </div>
-          <div className="btn-container">
-            <button
-              className="btn-back"
-              onClick={() => {
-                prevUser();
-              }}
-            >
-              <SlArrowLeft />
-            </button>
-            <button
-              className="btn-next"
-              onClick={() => {
-                nextUser();
-              }}
-            >
-              <SlArrowRight />
-            </button>
-          </div>
+      <div className="container bg-white  ">
+        <div className="container-title text-center">
+          <h1>Developer Team Members</h1>
         </div>
-      )}
+        {loading ? (
+          <div className="loading-div flex justify-center items-center">
+            Loading...
+          </div>
+        ) : (
+          <div className="inner-container flex flex-row">
+            <div className="backBtn-container flex w-10 bg-slate-400">
+              <button
+                className="btn-back"
+                onClick={() => {
+                  prevUser();
+                }}
+              >
+                <SlArrowLeft />
+              </button>
+            </div>
+            <div className="details-container flex flex-col items-center">
+              <div className="img-container text-center">
+                <img src={avatar} alt="" />
+              </div>
+              <div className="info-container text-center">
+                <h2>{uname}</h2>
+                <h4>{position}</h4>
+                <p className="text-justify">{about}</p>
+              </div>
+            </div>
+
+            <div className="nextBtn-container flex w-10 bg-slate-400">
+              <button
+                className="btn-next"
+                onClick={() => {
+                  nextUser();
+                }}
+              >
+                <SlArrowRight />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 }
