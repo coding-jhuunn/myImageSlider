@@ -8,5 +8,10 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: black;
+  background: rgb(242, 133, 133);
+  background: radial-gradient(
+    circle,
+    rgba(242, 133, 133, 0.8) 50%,
+    rgba(255, 164, 71, 0.8) 100%
+  );
 }
