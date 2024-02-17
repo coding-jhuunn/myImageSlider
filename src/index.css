@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   margin: 0;
-  background: rgb(242, 133, 133);
+  background: rgb(238, 174, 202);
   background: radial-gradient(
     circle,
-    rgba(242, 133, 133, 0.8) 50%,
-    rgba(255, 164, 71, 0.8) 100%
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
   );
 }

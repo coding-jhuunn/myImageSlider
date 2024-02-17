@@ -61,23 +61,23 @@ function App() {
   return (
     <>
       <div
-        className="container bg-white p-5 rounded-2xl flex justify-center items-center flex-col gap-3 shadow-lg  sm:w-80
-      sm:h-[600px] md:w-[600px] md:h-[800px]  border-8"
+        className="container bg-white p-5 rounded-2xl flex justify-center items-center flex-col gap-3 shadow-2xl  sm:w-[325px] sm:h-[500px;]
+       md:w-[425px] md:h-[575px] lg:w-[600px] lg:h-[725px]"
       >
         <div className="container-title flex justify-center items-center text-center h-[5%]">
-          <h1 className="font-sans font-bold text-1xl tracking-widest">
+          <h1 className="font-sans font-bold tracking-widest sm:text-lg md:text-2xl lg:text-3xl">
             Developer Team Members
           </h1>
         </div>
         {loading ? (
-          <div className="loading-div flex justify-center items-center  h-[90%]">
+          <div className="loading-div flex justify-center items-center  h-[90%] sm:text-base md:text-lg lg:text-2xl">
             Loading...
           </div>
         ) : (
-          <div className="inner-container flex items-center h-[90%] gap-4 ">
+          <div className="inner-container flex items-center h-[90%] gap-5">
             <div className="backBtn-container">
               <button
-                className="btn-back font-bold w-[25px] h-[25px] text-2xl flex justify-center items-center opacity-20 hover:opacity-100"
+                className="btn-back font-bold w-[25px] h-[25px] text-2xl flex justify-center items-center opacity-20 hover:opacity-100 sm:w-[12px] md:w-[18px] lg:w-[24px]"
                 onClick={() => {
                   prevUser();
                 }}
@@ -88,19 +88,19 @@ function App() {
             <div className="details-container flex flex-col h-[100%]  justify-evenly">
               <div className="img-container flex justify-center ">
                 <img
-                  className=" sm:h-32 md:h-60  border-red-400 border-4 rounded-full p-1"
+                  className=" sm:h-24 md:h-48  lg:h-64 border-blue-200 border-4 rounded-full p-1 hover:border-blue-400"
                   src={avatar}
                   alt=""
                 />
               </div>
-              <div className="info-container flex flex-col items-center">
-                <h2 className="font-mono text-center bold font-bold sm:text-xl md:text-3xl">
+              <div className="info-container flex flex-col items-center h-[60%] ">
+                <h2 className="font-mono text-center bold font-bold sm:text-lg md:text-2xl lg:text-3xl">
                   {uname}
                 </h2>
-                <h4 className="text-base font-semibold sm:text-center sm:text-base md:text-lg">
+                <h4 className="text-base font-semibold sm:text-center sm:text-sm md:text-lg">
                   {position}
                 </h4>
-                <p className="text-justify text-xs font-sans pt-5 md:text-base">
+                <p className="text-justify text-xs font-sans pt-5  sm:text-xs md:text-sm lg:text-lg">
                   {about}
                 </p>
               </div>
@@ -108,7 +108,7 @@ function App() {
 
             <div className="nextBtn-container ">
               <button
-                className="btn-next font-bold w-[25px] h-[25px] text-2xl flex justify-center items-center opacity-20 hover:opacity-100"
+                className="btn-next font-bold w-[25px] h-[25px] text-2xl flex justify-center items-center opacity-20 hover:opacity-100 sm:w-[12px] md:w-[18px] lg:w-[24px]"
                 onClick={() => {
                   nextUser();
                 }}
@@ -118,7 +118,7 @@ function App() {
             </div>
           </div>
         )}
-        <div className="credits flex justify-center items-center h-[10%">
+        <div className="credits flex justify-center items-center h-[5%]">
           <a
             href="https://github.com/coding-jhuunn/myImageSlider"
             className="opacity-50 hover:opacity-100  text-green-900 "

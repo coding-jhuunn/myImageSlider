@@ -1,6 +1,0 @@
-todo
-
-	responsive design
-		width
-		font sizes
-		grid
