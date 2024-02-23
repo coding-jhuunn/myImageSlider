@@ -61,7 +61,7 @@ function App() {
   return (
     <>
       <div
-        className="container bg-white p-5 rounded-2xl flex justify-center items-center flex-col gap-3 shadow-2xl  sm:w-[325px] sm:h-[500px;]
+        className="container bg-white p-5 rounded-2xl flex justify-center items-center flex-col gap-3 shadow-2xl  sm:w-[325px] sm:h-[550px;]
        md:w-[425px] md:h-[575px] lg:w-[600px] lg:h-[725px]"
       >
         <div className="container-title flex justify-center items-center text-center h-[5%]">
@@ -88,7 +88,7 @@ function App() {
             <div className="details-container flex flex-col h-[100%]  justify-evenly">
               <div className="img-container flex justify-center lg:pb-3 ">
                 <img
-                  className=" sm:h-24 md:h-48  lg:h-60 border-blue-200 border-4 rounded-full p-1 hover:border-blue-400"
+                  className=" sm:h-36 md:h-44  lg:h-60 border-blue-200 border-4 rounded-full p-1 hover:border-blue-400"
                   src={avatar}
                   alt=""
                 />
