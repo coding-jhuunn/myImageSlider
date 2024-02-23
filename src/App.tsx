@@ -86,9 +86,9 @@ function App() {
               </button>
             </div>
             <div className="details-container flex flex-col h-[100%]  justify-evenly">
-              <div className="img-container flex justify-center ">
+              <div className="img-container flex justify-center lg:pb-3 ">
                 <img
-                  className=" sm:h-24 md:h-48  lg:h-64 border-blue-200 border-4 rounded-full p-1 hover:border-blue-400"
+                  className=" sm:h-24 md:h-48  lg:h-60 border-blue-200 border-4 rounded-full p-1 hover:border-blue-400"
                   src={avatar}
                   alt=""
                 />
