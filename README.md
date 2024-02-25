@@ -21,6 +21,6 @@
 https://coding-jhuunn.github.io/myHelpCenterPage/
 
 ## Special thanks to the MultiAvatar API
-## For more info about API used 
+### For more info about API used 
 
 https://api.multiavatar.com/
